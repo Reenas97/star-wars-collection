@@ -1,0 +1,12 @@
+.icon_menu_mobile{
+    font-size: 24px;
+    cursor: pointer;
+    color: #fcfcfc;
+}
+
+.menu_mobile{
+    position: absolute;
+    right:0;
+    top: 106px;
+    background: #060606;
+}

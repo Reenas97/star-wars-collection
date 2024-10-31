@@ -1,0 +1,26 @@
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Orbitron", sans-serif;
+}
+
+body {
+  background: url('../src/assets/images/bg-star-wars.jpg');
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+.container{
+  padding: 0 10%;
+}
+
+.margint_default{
+  margin-top: 70px;
+}
+
+.marginb_default{
+  margin-bottom: 70px;
+}
+

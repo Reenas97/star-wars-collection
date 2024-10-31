@@ -1,0 +1,31 @@
+.menu ul{
+    padding: 0;
+    list-style: none;
+    gap: 40px;
+    display: flex;
+}
+
+.menu a{
+    color: #fcfcfc;
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    text-transform: uppercase;
+}
+
+.menu a::after,
+.menu a.active::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    height: 2px;
+    width: 0;
+    background: #fcfcfc;
+    transition: width 0.3s ease;
+}
+
+.menu a:hover::after,
+.menu a.active::after{
+    width: 100%;
+}
