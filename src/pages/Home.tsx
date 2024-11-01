@@ -7,8 +7,9 @@ import { Planet, fetchPlanets } from "../services/planets";
 import { Starship, fetchStarships } from "../services/starships";
 import { Movie, fetchMovies } from "../services/movies";
 import bannerImg from '../assets/images/main-banner.jpg'
+import GenericModal from "../components/Modal";
 
-function Personagens() {
+function Home() {
     
     const [characters, setCharacters] = useState<Character[]>([]);
     const [loadingCharacters, setLoadingCharacters] = useState(true);
@@ -18,6 +19,13 @@ function Personagens() {
     const [loadingStarships, setLoadingStarships] = useState(true);
     const [movies, setMovies] = useState<Movie[]>([]);
     const [loadingMovies, setLoadingMovies] = useState(true);
+    const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
+    const [modalVisible, setModalVisible] = useState<boolean>(false);
+
+    const handleCharacterClick = (character: Character) => {
+        setSelectedCharacter(character);
+        setModalVisible(true);
+    };
 
     useEffect(() =>{
         const getCharacters = async () => {
@@ -25,10 +33,10 @@ function Personagens() {
                 const data = await fetchCharacters();
                 setCharacters(data);
                 setLoadingCharacters(false);
-            } catch (error){
+            } catch (error) {
                 console.error('Erro ao carregar personagens', error);
             }
-        }
+        };
 
         const getPlanets = async () => {
             try {
@@ -82,8 +90,8 @@ function Personagens() {
                 title="Personagens"
                 items = {limitedCharacters}
                 loading = {loadingCharacters}
-                CardComponent={({name, imageUrl, homeworldName}) => (
-                    <Card name = {name} imageUrl={imageUrl} homeworld={homeworldName} link={'#'} />
+                CardComponent={({name, imageUrl, homeworldName, ...character}) => (
+                    <Card name = {name} imageUrl={imageUrl} homeworld={homeworldName} link={() => handleCharacterClick(character)} />
                 )}
                 link = "#"
                 text = "Ver todos os Personagens"
@@ -120,8 +128,24 @@ function Personagens() {
                 link = "#"
                 text = "Ver todos os filmes"
             />
+
+            <GenericModal
+                title={selectedCharacter ? selectedCharacter.name : ''}
+                open={modalVisible}
+                onCancel={() => setModalVisible(false)}
+                content={{
+                    Altura: selectedCharacter?.height !== undefined ? selectedCharacter.height : 'N/A',
+                    Massa: selectedCharacter?.mass !== undefined ? selectedCharacter.mass : 'N/A',
+                    'Cor do Cabelo': selectedCharacter?.hairColor || 'N/A',
+                    'Cor da Pele': selectedCharacter?.skinColor || 'N/A',
+                    'Cor dos Olhos': selectedCharacter?.eyeColor || 'N/A',
+                    'Ano de Nascimento': selectedCharacter?.birthYear || 'N/A',
+                    Gênero: selectedCharacter?.gender || 'N/A',
+                    'Filmes': selectedCharacter?.movieNames || 'N/A', // Adicionando aqui
+                }}
+            />
         </>
     )
 }
 
-export default Personagens
+export default Home
