@@ -1,3 +1,4 @@
+import { ConfigProvider, Spin } from "antd";
 import CardList from "../CardList";
 import MainButton from "../MainButton";
 import MainTitle from "../MainTitle";
@@ -17,7 +18,15 @@ const HomeSection: React.FC<HomeSectionProps> = ({title, items, loading, CardCom
         <section className={`margint_default marginb_default`}>
             <MainTitle text = {title} />
             {loading ?(
-                <div>Loading...</div>
+                <ConfigProvider
+                theme={{
+                  token: {
+                    colorPrimary: "#0cd7e9",
+                  },
+                }}
+              >
+                <Spin size="large" style={{ display: 'block', margin: 'auto' }} />
+              </ConfigProvider>
             ) : (
                 <CardList 
                     items= {items}
