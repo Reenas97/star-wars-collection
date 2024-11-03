@@ -1,27 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect} from 'react';
 import { Starship, fetchStarships} from '../services/starships';
 import GenericTable from '../components/Table';
 import SearchBar from '../components/Search';
 import MainTitlePages from '../components/MainTitlePages';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
+import { setLoading } from '../redux/slices/starshipsSlice';
+import { setStarships } from '../redux/slices/starshipsSlice';
 
 const StarshipsPage: React.FC = () => {
-  const [starships, setStafetchStarships] = useState<Starship[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+  const dispatch = useDispatch();
+  const { starships, loading } = useSelector((state: RootState) => state.starships);
 
-  const loadStarship = async () => {
-    setLoading(true);
+  const loadStarships = async () => {
+    dispatch(setLoading(true));
     try {
       const data = await fetchStarships();
-      setStafetchStarships(data);
+      dispatch(setStarships(data));
     } catch (error) {
       console.error('Erro ao buscar naves:', error);
     } finally {
-      setLoading(false);
+      dispatch(setLoading(false));
     }
   };
 
   useEffect(() => {
-    loadStarship();
+    loadStarships();
   }, []);
 
   const columns = [
@@ -48,11 +52,18 @@ const StarshipsPage: React.FC = () => {
   ];
 
   const handleSearch = async (value: string) => {
-    const filteredStarships = await fetchStarships();
-    const results = filteredStarships.filter(starship => 
-      starship.name.toLowerCase().includes(value.toLowerCase())
-    );
-    setStafetchStarships(results); 
+    dispatch(setLoading(true));
+    try {
+      const allCharacters = await fetchStarships();
+      const results = allCharacters.filter(starship => 
+        starship.name.toLowerCase().includes(value.toLowerCase())
+      );
+      dispatch(setStarships(results));
+    } catch (error) {
+      console.error('Erro ao buscar naves:', error);
+    } finally {
+      dispatch(setLoading(false));
+    }
   };
 
   return (
@@ -71,3 +82,5 @@ const StarshipsPage: React.FC = () => {
 };
 
 export default StarshipsPage;
+
+

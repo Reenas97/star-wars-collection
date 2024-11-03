@@ -1,28 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Planet, fetchPlanets } from '../services/planets';
 import GenericTable from '../components/Table';
 import SearchBar from '../components/Search';
 import MainTitlePages from '../components/MainTitlePages';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
+import { setLoading } from '../redux/slices/charactersSlice';
+import { setPlanets } from '../redux/slices/planetsSlice';
 
 const PlanetsPage: React.FC = () => {
-  const [planets, setPlanets] = useState<Planet[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+  const dispatch = useDispatch();
+  const { planets, loading } = useSelector((state: RootState) => state.planets);
 
-  const loadPlanet = async () => {
-    setLoading(true);
+  const loadPlanets = async () => {
+    dispatch(setLoading(true));
     try {
       const data = await fetchPlanets();
-      setPlanets(data);
+      dispatch(setPlanets(data));
     } catch (error) {
       console.error('Erro ao buscar planetas:', error);
     } finally {
-      setLoading(false);
+      dispatch(setLoading(false));
     }
   };
 
   useEffect(() => {
-    loadPlanet();
+    loadPlanets();
   }, []);
+
 
   const columns = [
     {
@@ -48,11 +53,18 @@ const PlanetsPage: React.FC = () => {
   ];
 
   const handleSearch = async (value: string) => {
-    const filteredPlanets = await fetchPlanets();
-    const results = filteredPlanets.filter(planet => 
-      planet.name.toLowerCase().includes(value.toLowerCase())
-    );
-    setPlanets(results); 
+    dispatch(setLoading(true));
+    try {
+      const allCharacters = await fetchPlanets();
+      const results = allCharacters.filter(planets => 
+        planets.name.toLowerCase().includes(value.toLowerCase())
+      );
+      dispatch(setPlanets(results));
+    } catch (error) {
+      console.error('Erro ao buscar planetas:', error);
+    } finally {
+      dispatch(setLoading(false));
+    }
   };
 
   return (

@@ -5,28 +5,31 @@ import GenericTable from '../components/Table';
 import GenericModal from '../components/Modal';
 import SearchBar from '../components/Search';
 import MainTitlePages from '../components/MainTitlePages';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
+import { setCharacters, setLoading } from '../redux/slices/charactersSlice';
 
 const CharactersPage: React.FC = () => {
-  const [characters, setCharacters] = useState<Character[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+  const dispatch = useDispatch();
+  const { characters, loading } = useSelector((state: RootState) => state.characters);
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
 
   const loadCharacters = async () => {
-    setLoading(true);
+    dispatch(setLoading(true));
     try {
       const data = await fetchCharacters();
-      setCharacters(data);
+      dispatch(setCharacters(data));
     } catch (error) {
       console.error('Erro ao buscar personagens:', error);
     } finally {
-      setLoading(false);
+      dispatch(setLoading(false));
     }
   };
 
   useEffect(() => {
     loadCharacters();
-  }, []);
+  }, [dispatch]);
 
   const columns = [
     {
@@ -54,11 +57,18 @@ const CharactersPage: React.FC = () => {
   ];
 
   const handleSearch = async (value: string) => {
-    const filteredCharacters = await fetchCharacters();
-    const results = filteredCharacters.filter(character => 
-      character.name.toLowerCase().includes(value.toLowerCase())
-    );
-    setCharacters(results); 
+    dispatch(setLoading(true));
+    try {
+      const allCharacters = await fetchCharacters();
+      const results = allCharacters.filter(character => 
+        character.name.toLowerCase().includes(value.toLowerCase())
+      );
+      dispatch(setCharacters(results)); 
+    } catch (error) {
+      console.error('Erro ao buscar personagens:', error);
+    } finally {
+      dispatch(setLoading(false));
+    }
   };
 
   const handleCharacterClick = (character: Character) => {

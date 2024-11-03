@@ -5,28 +5,32 @@ import GenericTable from '../components/Table';
 import GenericModal from '../components/Modal';
 import SearchBar from '../components/Search';
 import MainTitlePages from '../components/MainTitlePages';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
+import { setLoading } from '../redux/slices/charactersSlice';
+import { setMovies } from '../redux/slices/moviesSlice';
 
 const MoviesPage: React.FC = () => {
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+  const dispatch = useDispatch();
+  const { movies, loading } = useSelector((state: RootState) => state.movies);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
 
   const loadMovies = async () => {
-    setLoading(true);
+    dispatch(setLoading(true));
     try {
       const data = await fetchMovies();
-      setMovies(data);
+      dispatch(setMovies(data));
     } catch (error) {
       console.error('Erro ao buscar filmes:', error);
     } finally {
-      setLoading(false);
+      dispatch(setLoading(false));
     }
   };
 
   useEffect(() => {
     loadMovies();
-  }, []);
+  }, [dispatch]);
 
   const columns = [
     {
@@ -59,11 +63,18 @@ const MoviesPage: React.FC = () => {
   ];
 
   const handleSearch = async (value: string) => {
-    const filteredMovies = await fetchMovies();
-    const results = filteredMovies.filter(movie => 
-      movie.name.toLowerCase().includes(value.toLowerCase())
-    );
-    setMovies(results); 
+    dispatch(setLoading(true));
+    try {
+      const allMovies = await fetchMovies();
+      const results = allMovies.filter(movie => 
+        movie.name.toLowerCase().includes(value.toLowerCase())
+      );
+      dispatch(setMovies(results));
+    } catch (error) {
+      console.error('Erro ao buscar filmes:', error);
+    } finally {
+      dispatch(setLoading(false));
+    }
   };
 
   const handleMovieClick = (movie: Movie) => {
