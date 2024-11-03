@@ -26,7 +26,7 @@ export const fetchPlanets = async  (): Promise<Planet[]> => {
     const data = await response.json();
 
     const planetData: Planet[] = await Promise.all(
-        data.results.map(async (planet: any, index: number) => {
+        data.results.map(async (planet: any) => {
     
           // Gera a URL da imagem para o personagem usando o índice
           const imageUrl = planetImageMap[planet.name] || '';

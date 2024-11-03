@@ -32,7 +32,7 @@ export const fetchMovies = async  (): Promise<Movie[]> => {
     const data = await response.json();
 
     const movieData: Movie[] = await Promise.all(
-        data.results.map(async (movie: any, index: number) => {
+        data.results.map(async (movie: any) => {
     
           // Gera a URL da imagem para o personagem usando o índice
           const imageUrl = moviesImageMap[movie.title] || '';

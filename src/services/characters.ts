@@ -28,7 +28,7 @@ export const fetchCharacters = async (): Promise<Character[]> => {
     const data = await response.json();
   
     const characterData: Character[] = await Promise.all(
-      data.results.map(async (character: any, index: number) => {
+      data.results.map(async (character: any) => {
         const planet = await fetchPlanet(character.homeworld);
         const movies = await fetchMovie(character.films);
         const movieNames = movies.map((movie) => movie.name).join(", ");

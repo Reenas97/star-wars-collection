@@ -19,7 +19,7 @@ export const fetchStarships = async  (): Promise<Starship[]> => {
     const data = await response.json();
 
     const starshipData: Starship[] = await Promise.all(
-        data.results.map(async (starship: any, index: number) => {
+        data.results.map(async (starship: any) => {
     
           // Gera a URL da imagem para o personagem usando o índice
           const imageUrl = starshipImageMap[starship.name] || '';
