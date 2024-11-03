@@ -6,6 +6,13 @@
   font-family: "Orbitron", sans-serif;
 }
 
+#root{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 body {
   background: url('../src/assets/images/bg-star-wars.jpg');
   min-width: 320px;
@@ -24,3 +31,20 @@ body {
   margin-bottom: 70px;
 }
 
+@media(max-width: 768px){
+  .container{
+    padding: 0 5%;
+  }
+
+  .gap{
+    gap: 28px;
+  }
+
+  .margint_default{
+    margin-top: 50px;
+  }
+  
+  .marginb_default{
+    margin-bottom: 50px;
+  }
+}

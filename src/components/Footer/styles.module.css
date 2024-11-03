@@ -7,3 +7,9 @@
     font-size: 14px;
     border-top: 1px solid #fcfcfc;
 }
+
+@media(max-width: 768px){
+    .footer{
+        padding: 5px 0;
+    }
+}

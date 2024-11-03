@@ -1,4 +1,4 @@
-import { ConfigProvider, Input } from 'antd';
+import { Col, ConfigProvider, Input, Row } from 'antd';
 
 const { Search } = Input;
 
@@ -20,13 +20,17 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, placeholder = "Buscar" 
     },
   }}
 >
-<Search
-      placeholder={placeholder}
-      enterButton="Buscar"
-      size="large"
-      onSearch={onSearch}
-      style={{ marginBottom: '30px', width: '35%', float: 'right' }} 
-    />
+  <Row justify="end" style={{ marginBottom: '30px' }}>
+    <Col xs={24} sm={24} md={12} lg={8}>
+      <Search
+        placeholder={placeholder}
+        enterButton="Buscar"
+        size="large"
+        onSearch={onSearch}
+        style={{ width: '100%' }} 
+      />
+    </Col>
+  </Row>
 </ConfigProvider>
   );
 };

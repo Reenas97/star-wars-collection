@@ -24,13 +24,16 @@ const GenericTable = <T,>({
     },
   }}
 >
+<div style={{ overflowX: 'auto' }}>
 <AntTable<T>
       columns={columns}
       dataSource={dataSource}
       loading={loading}
       pagination={{ pageSize: 5 }}
       rowKey={(record) => (record as any).name}
+      scroll={{ x: 'max-content' }}
     />
+</div>
 </ConfigProvider>
   );
 };

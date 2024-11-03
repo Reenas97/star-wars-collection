@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { NavLink, useLocation } from "react-router-dom";
 import { MenuOutlined, CloseOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
@@ -18,6 +18,11 @@ const items: MenuItem[] = [
 const MenuMobile: React.FC = () => {
 
   const [visible, setVisible] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    setVisible(false);
+  }, [location]);
 
   const onClick: MenuProps['onClick'] = (e) => {
     console.log('click ', e);

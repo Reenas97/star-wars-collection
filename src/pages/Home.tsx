@@ -39,7 +39,7 @@ function Home() {
                 'Cor dos Olhos': selectedItem.eyeColor,
                 'Ano de Nascimento': selectedItem.birthYear,
                 Gênero: selectedItem.gender,
-                Filmes: selectedItem.movieNames?.join(', ') || 'N/A',
+                Filmes: selectedItem.movieNames,
             };
         } else if ("terrain" in selectedItem) {  // Planet
             return {

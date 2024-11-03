@@ -36,3 +36,9 @@
     color: #fefefe;
     margin-top: 5px;
 }
+
+@media(max-width: 768px){
+    .card_title{
+        font-size: 18px;
+    }
+}
