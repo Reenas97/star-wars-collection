@@ -71,7 +71,6 @@ const CharactersPage: React.FC = () => {
         <MainTitlePages 
             text="Personagens"
         />
-      <h1>Personagens Star Wars</h1>
       <SearchBar onSearch={handleSearch} placeholder="Buscar por personagem" />
       <GenericTable<Character>
         dataSource={characters}

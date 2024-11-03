@@ -14,6 +14,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, placeholder = "Buscar" 
     token: {
         colorBgContainer: '#060606',
         colorTextPlaceholder: '#ccc',
+        colorText: '#ccc',
         colorBorder: '#0cd7e9',
         colorPrimary: '#0cd7e9',
     },

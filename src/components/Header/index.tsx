@@ -3,6 +3,7 @@ import logo from "../../assets/images/star-wars-logo.png"
 import styles from "./styles.module.css"
 import MenuMobile from "../MenuMobile"
 import { useEffect, useState } from "react"
+import { NavLink } from "react-router-dom";
 
 const Header = () => {
     const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < 768);
@@ -20,7 +21,9 @@ const Header = () => {
     
     return (
         <header className={`${styles.header} container`}>
-            <img src={logo} className = {styles.logo} alt="Logo Star Wars Collection" />
+            <NavLink to="/">
+                <img src={logo} className = {styles.logo} alt="Logo Star Wars Collection" />
+            </NavLink>
             {isMobile ? <MenuMobile />: <Menu />}
         </header>
     )

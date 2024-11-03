@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { NavLink } from "react-router-dom";
 import { MenuOutlined, CloseOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
@@ -7,11 +8,11 @@ import styles from "./styles.module.css";
 type MenuItem = Required<MenuProps>['items'][number];
 
 const items: MenuItem[] = [
-  { key: '1', label: 'Início' },
-  { key: '2', label: 'Personagens' },
-  { key: '3', label: 'Planetas' },
-  { key: '4', label: 'Naves' },
-  { key: '5', label: 'Filmes' }      
+  { key: '1', label: <NavLink to="/">Início</NavLink> },
+  { key: '2', label: <NavLink to="/personagens">Personagens</NavLink> },
+  { key: '3', label: <NavLink to="/planetas">Planetas</NavLink> },
+  { key: '4', label: <NavLink to="/naves">Naves</NavLink> },
+  { key: '5', label: <NavLink to="/filmes">Filmes</NavLink> },     
 ];
 
 const MenuMobile: React.FC = () => {
