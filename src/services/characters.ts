@@ -14,6 +14,7 @@ export interface Character {
   mass?: number;
   skinColor?: string;
   movie?: string[];
+  movieNames?: string[];
 }
 
 const characterImageMap: { [key: string]: string } = {
@@ -31,12 +32,6 @@ export const fetchCharacters = async (): Promise<Character[]> => {
         const planet = await fetchPlanet(character.homeworld);
         const movies = await fetchMovie(character.films);
         const movieNames = movies.map((movie) => movie.name).join(", ");
-
-        //console.log(`Espécie retornado para ${character.name}: ${specieNames}`);
-
-        //console.log(`Planeta retornado para ${character.name}: ${planet.name}`);
-
-        //console.log(character.hair_color)
   
         const imageUrl = characterImageMap[character.name] || '';
   

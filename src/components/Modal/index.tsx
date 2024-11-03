@@ -5,7 +5,7 @@ interface GenericModalProps {
   title: string;
   open: boolean;
   onCancel: () => void;
-  content: Record<string, any>; // Aceita um objeto onde as chaves são os títulos e os valores são os conteúdos
+  content: Record<string, any>;
 }
 
 const GenericModal: React.FC<GenericModalProps> = ({ title, open, onCancel, content }) => {

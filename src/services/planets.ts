@@ -1,6 +1,9 @@
 export interface Planet {
     name: string;
     imageUrl?: string;
+    climate?: string;
+    terrain?: string;
+    population?: number;
 }
 
 export const fetchPlanet = async (url: string): Promise<Planet> => {
@@ -31,6 +34,9 @@ export const fetchPlanets = async  (): Promise<Planet[]> => {
           return {
             name: planet.name,
             imageUrl,
+            climate: planet.climate,
+            terrain: planet.terrain,
+            population: planet.population
           };
         })
       );

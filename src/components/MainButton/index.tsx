@@ -1,4 +1,5 @@
 import { Button } from 'antd';
+import { NavLink } from "react-router-dom";
 import styles from './styles.module.css';
 
 interface ButtonProps {
@@ -9,9 +10,9 @@ interface ButtonProps {
 const MainButton: React.FC<ButtonProps> = ({ link, text }) => {
     return (
         <Button type="primary" className={styles.button}>
-          <a href={link} target="_blank">
+          <NavLink to={link}>
             {text}
-          </a>
+          </NavLink>
         </Button>
     )
 }

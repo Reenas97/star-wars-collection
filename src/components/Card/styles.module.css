@@ -15,6 +15,7 @@
     -moz-box-shadow: 0px 0px 12px 5px #0cd7e9;
     box-shadow: 0px 0px 12px 14px #0cd7e9;
     transition: all ease 0.4s;
+    cursor: pointer;
 }
 
 .card_image{

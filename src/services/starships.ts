@@ -1,6 +1,10 @@
 export interface Starship {
     name: string;
     imageUrl?: string;
+    model?:string;
+    manufacturer: string;
+    starshipClass: string;
+
 }
 
 const starshipImageMap: { [key: string]: string } = {
@@ -23,6 +27,9 @@ export const fetchStarships = async  (): Promise<Starship[]> => {
           return {
             name: starship.name,
             imageUrl,
+            model: starship.model,
+            manufacturer: starship.manufacturer,
+            starshipClass: starship.starship_class
           };
         })
       );

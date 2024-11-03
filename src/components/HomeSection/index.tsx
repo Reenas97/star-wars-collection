@@ -7,7 +7,7 @@ interface HomeSectionProps {
     title: string;
     items: any[];
     loading: boolean;
-    CardComponent: React.FC<{name: string; imageUrl: string; homeworldName: string}>;
+    CardComponent: React.FC<{item: any}>;
     link: string;
     text: string;
 }

@@ -19,13 +19,53 @@ function Home() {
     const [loadingStarships, setLoadingStarships] = useState(true);
     const [movies, setMovies] = useState<Movie[]>([]);
     const [loadingMovies, setLoadingMovies] = useState(true);
-    const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
+    const [selectedItem, setSelectedItem] = useState<Character | Planet | Starship | Movie | null>(null);
     const [modalVisible, setModalVisible] = useState<boolean>(false);
 
-    const handleCharacterClick = (character: Character) => {
-        setSelectedCharacter(character);
+    const handleItemClick = (item: Character | Planet | Starship | Movie) => {
+        setSelectedItem(item);
         setModalVisible(true);
     };
+
+    const getModalContent = () => {
+        if (!selectedItem) return {};
+        
+        if ("gender" in selectedItem) {  // Character
+            return {
+                Altura: selectedItem.height,
+                Massa: selectedItem.mass,
+                'Cor do Cabelo': selectedItem.hairColor,
+                'Cor da Pele': selectedItem.skinColor,
+                'Cor dos Olhos': selectedItem.eyeColor,
+                'Ano de Nascimento': selectedItem.birthYear,
+                Gênero: selectedItem.gender,
+                Filmes: selectedItem.movieNames?.join(', ') || 'N/A',
+            };
+        } else if ("terrain" in selectedItem) {  // Planet
+            return {
+                Nome: selectedItem.name,
+                População: selectedItem.population,
+                Terreno: selectedItem.terrain,
+                Clima: selectedItem.climate,
+            };
+        } else if ("model" in selectedItem) {  // Starship
+            return {
+                Nome: selectedItem.name,
+                Modelo: selectedItem.model,
+                Fabricante: selectedItem.manufacturer,
+                'Classe': selectedItem.starshipClass
+            };
+        } else if ("releaseDate" in selectedItem) {  // Movie
+            return {
+                Título: selectedItem.name,
+                Diretor: selectedItem.director,
+                Produtores: selectedItem.producer,
+                'Data de Lançamento': selectedItem.releaseDate,
+                Sinopse: selectedItem.openingCrawl,
+            };
+        }
+        return {};
+    };    
 
     useEffect(() =>{
         const getCharacters = async () => {
@@ -90,10 +130,10 @@ function Home() {
                 title="Personagens"
                 items = {limitedCharacters}
                 loading = {loadingCharacters}
-                CardComponent={({name, imageUrl, homeworldName, ...character}) => (
-                    <Card name = {name} imageUrl={imageUrl} homeworld={homeworldName} link={() => handleCharacterClick(character)} />
+                CardComponent={({item}) => (
+                    <Card name = {item.name} imageUrl={item.imageUrl} homeworld={item.homeworldName} link={() => handleItemClick(item)} />
                 )}
-                link = "#"
+                link = "/personagens"
                 text = "Ver todos os Personagens"
             />
 
@@ -101,10 +141,10 @@ function Home() {
                 title="Planetas"
                 items = {limitedPlanets}
                 loading = {loadingPlanets}
-                CardComponent={({name, imageUrl}) => (
-                    <Card name = {name} imageUrl={imageUrl} link={'#'} />
+                CardComponent={({item}) => (
+                    <Card name = {item.name} imageUrl={item.imageUrl} link={() => handleItemClick(item)} />
                 )}
-                link = "#"
+                link = "/planetas"
                 text = "Ver todos os Planetas"
             />
 
@@ -112,37 +152,28 @@ function Home() {
                 title="Espaçonaves"
                 items = {limitedStarships}
                 loading = {loadingStarships}
-                CardComponent={({name, imageUrl}) => (
-                    <Card name = {name} imageUrl={imageUrl} link={'#'} />
+                CardComponent={({item}) => (
+                    <Card name = {item.name} imageUrl={item.imageUrl} link={() => handleItemClick(item)} />
                 )}
-                link = "#"
+                link = "/espaconaves"
                 text = "Ver todas as Espaçonaves"
             />
             <HomeSection 
                 title="Filmes"
                 items = {limitedMovies}
                 loading = {loadingMovies}
-                CardComponent={({name, imageUrl}) => (
-                    <Card name = {name} imageUrl={imageUrl} link={'#'} />
+                CardComponent={({item}) => (
+                    <Card name = {item.name} imageUrl={item.imageUrl} link={() => handleItemClick(item)} />
                 )}
-                link = "#"
+                link = "/filmes"
                 text = "Ver todos os filmes"
             />
 
             <GenericModal
-                title={selectedCharacter ? selectedCharacter.name : ''}
+                title={selectedItem ? selectedItem.name : ''}
                 open={modalVisible}
                 onCancel={() => setModalVisible(false)}
-                content={{
-                    Altura: selectedCharacter?.height !== undefined ? selectedCharacter.height : 'N/A',
-                    Massa: selectedCharacter?.mass !== undefined ? selectedCharacter.mass : 'N/A',
-                    'Cor do Cabelo': selectedCharacter?.hairColor || 'N/A',
-                    'Cor da Pele': selectedCharacter?.skinColor || 'N/A',
-                    'Cor dos Olhos': selectedCharacter?.eyeColor || 'N/A',
-                    'Ano de Nascimento': selectedCharacter?.birthYear || 'N/A',
-                    Gênero: selectedCharacter?.gender || 'N/A',
-                    'Filmes': selectedCharacter?.movieNames || 'N/A', // Adicionando aqui
-                }}
+                content={getModalContent()}
             />
         </>
     )

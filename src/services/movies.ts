@@ -1,6 +1,10 @@
 export interface Movie{
     name: string;
     imageUrl?: string;
+    director?: string,
+    producer?: string;
+    releaseDate?: string;
+    openingCrawl?: string;
 }
 
 export const fetchMovie = async (urls: string[]): Promise<Movie[]> => {
@@ -36,6 +40,10 @@ export const fetchMovies = async  (): Promise<Movie[]> => {
           return {
             name: movie.title,
             imageUrl,
+            director: movie.director,
+            producer: movie.producer,
+            releaseDate: movie.release_date,
+            openingCrawl: movie.opening_crawl
           };
         })
       );

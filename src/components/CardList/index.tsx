@@ -11,7 +11,7 @@ const CardList: React.FC<CardListProps> = ({ items, CardComponent }) => {
             <Row gutter={{ xs: 8, sm: 16, md: 36, xxl: 96 }}>
                 {items.map((item, index) => (
                     <Col xs={24} sm={12} md={8} key={item.name}> {/* Adiciona a key aqui */}
-                        <CardComponent {...item} />
+                        <CardComponent item={item} />
                     </Col>
                 ))}
             </Row>
