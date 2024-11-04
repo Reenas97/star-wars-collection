@@ -2,7 +2,7 @@
 
 A web application for exploring characters, planets, movies, and starships from the Star Wars universe. Built with React, TypeScript, Redux, and SWAPI for data fetching. Users can interact with the data by filtering and viewing details of each entity.
 
-**Live Demo**: [Star Wars Collection on AWS CloudFront](https://d326i8bv4be7v3.cloudfront.net/)
+**Live Demo**: [Star Wars Collection on AWS CloudFront](https://d2bexfps11sfgc.cloudfront.net/)
 
 ## Table of Contents
 
