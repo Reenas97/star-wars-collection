@@ -16,7 +16,7 @@ interface HomeSectionProps {
 
 const HomeSection: React.FC<HomeSectionProps> = ({title, items, loading, CardComponent, link, text}) =>{
     return (
-        <section className={`margint_default marginb_default`}>
+        <section className={`marginb_default`}>
             <MainTitle text = {title} />
             {loading ?(
                 <ConfigProvider

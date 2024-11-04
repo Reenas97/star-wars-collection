@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Planetas from "./pages/Planetas";
 import Naves from "./pages/Naves";
 import Filmes from "./pages/Filmes";
+import React from 'react';
 
 const AppRoutes = () => {
     return (
