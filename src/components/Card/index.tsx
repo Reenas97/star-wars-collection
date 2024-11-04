@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./styles.module.css";
 
 interface CardProps {
@@ -15,7 +16,7 @@ const Card: React.FC<CardProps> = ({ name, homeworld, imageUrl, link }) => {
         {homeworld ?(
             <p className={styles.aditional_info}>Planeta Natal: {homeworld}</p>
             ) : 
-        ''}
+        null}
       </div>
     );
 };

@@ -1,5 +1,6 @@
 import { Table as AntTable, ConfigProvider } from 'antd';
 import type { TableColumnsType } from 'antd';
+import React from 'react';
 
 interface GenericTableProps<T> {
   columns: TableColumnsType<T>;

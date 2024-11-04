@@ -1,16 +1,17 @@
+import React from 'react';
 import { Col, Row } from 'antd';
 
 interface CardListProps {
-    items: any[]; // Ajuste para o tipo apropriado
-    CardComponent: React.FC<any>; // O componente que renderiza cada card
+    items: any[];
+    CardComponent: React.FC<any>;
 }
-  
+
 const CardList: React.FC<CardListProps> = ({ items, CardComponent }) => {
     return (
         <div className="container">
             <Row gutter={{ xs: 8, sm: 16, md: 36, xxl: 96 }} className='gap'>
                 {items.map((item) => (
-                    <Col xs={24} sm={12} md={8} key={item.name}> {/* Adiciona a key aqui */}
+                    <Col xs={24} sm={12} md={8} key={item.name}>
                         <CardComponent item={item} />
                     </Col>
                 ))}
@@ -18,5 +19,5 @@ const CardList: React.FC<CardListProps> = ({ items, CardComponent }) => {
         </div>
     );
 };
-  
-  export default CardList;
+
+export default CardList;

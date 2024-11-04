@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import styles from "./styles.module.css";
+import React from "react";
 
 // Define a interface para as propriedades
 interface LinkProps {

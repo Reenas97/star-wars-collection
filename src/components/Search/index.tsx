@@ -1,4 +1,5 @@
 import { Col, ConfigProvider, Input, Row } from 'antd';
+import React from 'react';
 
 const { Search } = Input;
 

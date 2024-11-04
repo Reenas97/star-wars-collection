@@ -2,6 +2,7 @@ import { ConfigProvider, Spin } from "antd";
 import CardList from "../CardList";
 import MainButton from "../MainButton";
 import MainTitle from "../MainTitle";
+import React from "react";
 
 
 interface HomeSectionProps {

@@ -1,3 +1,4 @@
+import React from "react";
 import Menu from "../Menu"
 import logo from "../../assets/images/star-wars-logo.png"
 import styles from "./styles.module.css"
