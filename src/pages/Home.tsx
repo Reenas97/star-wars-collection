@@ -149,14 +149,14 @@ function Home() {
             />
 
             <HomeSection 
-                title="Espaçonaves"
+                title="Naves"
                 items = {limitedStarships}
                 loading = {loadingStarships}
                 CardComponent={({item}) => (
                     <Card name = {item.name} imageUrl={item.imageUrl} link={() => handleItemClick(item)} />
                 )}
-                link = "/espaconaves"
-                text = "Ver todas as Espaçonaves"
+                link = "/naves"
+                text = "Ver todas as Naves"
             />
             <HomeSection 
                 title="Filmes"
