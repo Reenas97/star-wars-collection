@@ -8,13 +8,13 @@ describe("Card", () => {
 
     it("should render the right name", () => {
         render(<Card name="Luke" imageUrl="https://example.com/luke.jpg" link={mockLink} />);
-        const nameElement = screen.getByRole("heading", { name: /darth vader/i });
+        const nameElement = screen.getByRole("heading", { name: /Luke/i });
         expect(nameElement).toBeInTheDocument();
     });
 
     it("should render the right image", () => {
         render(<Card name="Luke" imageUrl="https://example.com/luke.jpg" link={mockLink} />);
-        const imgElement = screen.getByRole("img", { name: /darth vader/i });
+        const imgElement = screen.getByRole("img", { name: /luke/i });
         expect(imgElement).toHaveAttribute("src", "https://example.com/luke.jpg");
     });
 
@@ -32,7 +32,7 @@ describe("Card", () => {
 
     it("should call the function link when the card is clicked", () => {
         render(<Card name="Luke" imageUrl="https://example.com/luke.jpg" link={mockLink} />);
-        const cardElement = screen.getByRole("img", { name: /darth vader/i }).parentElement;   
+        const cardElement = screen.getByRole("img", { name: /Luke/i }).parentElement;   
         if (cardElement) {
             cardElement.click();
             expect(mockLink).toHaveBeenCalled();
